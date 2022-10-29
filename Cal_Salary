@@ -1,0 +1,15 @@
+CREATE OR REPLACE FUNCTION Cal_salary(p_sal number,p_date date)
+  RETURN NUMBER IS
+  v_sal_per_day number(10);
+  v_total_sal number(10);
+
+  
+  BEGIN
+  v_sal_per_day:=p_sal /(last_day(sysdate) - trunc(sysdate,'MONTH'));
+  v_total_sal:= p_sal -  v_sal_per_day * ( last_day(sysdate) -  sysdate);
+    RETURN v_total_sal;
+  END Cal_salary;
+
+
+select Cal_salary(310,'29-OCT-22')
+from dual
